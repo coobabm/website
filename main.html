@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+        }
+
+        .login-form {
+            display: flex;
+            align-items: center;
+        }
+
+        .login-input {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-left: 0.5rem;
+            padding: 0.5rem;
+        }
+
+        .login-btn {
+            background-color: #c2c275;
+            border: none;
+            border-radius: 3px;
+            color: #333;
+            cursor: pointer;
+            margin-left: 0.5rem;
+            padding: 0.57rem 1rem;
+        }
+
+        .menu {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            justify-content: space-evenly;
+        }
+
+        .menu-item {
+            margin-right: 1rem;
+        }
+
+        .menu-link {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 1rem;
+        }
+
+        .menu-link:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            display: flex;
+            margin: 2rem;
+        }
+
+        .main {
+            flex: 3;
+            margin-right: 2rem;
+        }
+
+        .sidebar {
+            flex: 1;
+        }
+
+        .sidebar-links {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar-link {
+            display: block;
+            margin-bottom: 1rem;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .sidebar-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Roomie</h1>
+        <ul class="menu">
+            <li class="menu-item"><a class="menu-link" href="#">Home</a></li>
+            <li class="menu-item"><a class="menu-link" href="#">About</a></li>
+            <li class="menu-item"><a class="menu-link" href="#">Services</a></li>
+            <li class="menu-item"><a class="menu-link" href="#">Blog</a></li>
+            <li class="menu-item"><a class="menu-link" href="#">Contact</a></li>
+        </ul>
+        <div class="login-form">
+            <input class="login-input" type="text" placeholder="ID">
+            <input class="login-input" type="password" placeholder="Password">
+            <button class="login-btn">Login</button>
+        </div>
+    </header>
+    <nav>
+        
+    </nav>
+    <div class="container">
+        <div class="main">
+            <head>
+                <meta charset="utf-8">
+                <title>googel지도</title>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/markerclustererplus/2.1.4/markerclusterer.min.js"></script>
+                <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+                <style>
+                  #search-box {
+                    
+                    position: absolute;
+                    top: 200px;
+                    left: 40px;
+                    width: 400px;
+                    height: 40px;
+                    z-index: 1;
+                    box-sizing: border-box;
+                    border: 2px solid #ccc;
+                    border-radius: 4px;
+                    font-size: 16px;
+                    background-color: rgb(251, 246, 237);
+                    background-image: url('https://www.gstatic.com/images/icons/material/system/1x/search_grey600_24dp.png');
+                    background-size: 20px 20px;
+                    background-position: 10px 8px;
+                    background-repeat: no-repeat;
+                    padding: 5px 40px 5px 40px;
+                    -webkit-transition: width 0.4s ease-in-out;
+                    transition: width 0.4s ease-in-out;
+                  }
+            
+                  #search-box:focus {
+                    width: 40%;
+                  }
+                </style>
+              </head>
+              <body>
+                <div id="search-container">
+                  <input id="search-box" type="text" placeholder="지역，지하철역，학교 검색">
+                </div>
+                <div id="map" style="width: 1000px; height: 600px;"></div>
+            
+                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4f4_WV7kLLXPf45FdPyz2fS4l6LL8Izo&libraries=places&callback=initMap&language=ko"></script>
+            
+                <script>
+                  function initMap() {
+                    var mapOptions = {
+                      center: { lat: 37.5665, lng: 126.9780 },
+                      zoom: 10,
+                    };
+            
+                    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            
+                    var locations = [
+                      { lat: 37.5665, lng: 126.9780, number: 1 },
+                      { lat: 37.5777, lng: 126.9890, number: 1 },
+                      { lat: 37.5558, lng: 126.9950, number: 1 },
+                      { lat: 37.5675, lng: 126.9710, number: 1 },
+                      { lat: 37.5577, lng: 126.9820, number: 1 },
+                      { lat: 37.5455, lng: 126.9930, number: 1 },
+                      { lat: 37.5648, lng: 126.9872, number: 1 },
+                      { lat: 37.5623, lng: 126.9826, number: 1 },
+                      { lat: 37.5701, lng: 126.9745, number: 1 },
+            { lat: 37.5519, lng: 126.9908, number: 1 },
+            { lat: 37.5567, lng: 126.9801, number: 1 },
+            { lat: 37.5724, lng: 126.9684, number: 1 },
+            { lat: 37.5463, lng: 126.9956, number: 1 },
+            { lat: 37.5666, lng: 126.9673, number: 1 },
+            { lat: 37.5778, lng: 126.9781, number: 1 },
+            { lat: 37.5541, lng: 126.9915, number: 1 },
+            { lat: 37.5516, lng: 126.9836, number: 1 },
+            { lat: 37.5655, lng: 126.9785, number: 1 },
+            { lat: 37.5557, lng: 126.9771, number: 1 },
+            { lat: 37.5606, lng: 126.9857, number: 1 },
+            { lat: 37.5709, lng: 126.9727, number: 1 },
+            { lat: 37.5583, lng: 126.9902, number: 1 },
+            { lat: 37.5749, lng: 126.9778, number: 1 },
+            { lat: 37.5618, lng: 126.9739, number: 1 },
+            { lat: 37.5494, lng: 126.9843, number: 1 },
+            { lat: 37.5668, lng: 126.9866, number: 1 },
+            { lat: 37.5598, lng: 126.9966, number: 1 },
+            { lat: 37.5469, lng: 126.9978, number: 1 },
+            { lat: 37.5572, lng: 126.9869, number: 1 },
+            { lat: 37.5503, lng: 126.9801, number: 1 },
+            { lat: 37.5508, lng: 126.9984, number: 1 },
+            { lat: 37.5489, lng: 126.9958, number: 1 },
+            { lat: 37.5455, lng: 126.9925, number: 1 },
+            { lat: 37.5525, lng: 126.9918, number: 1 },
+            { lat: 37.5581, lng: 126.9875, number: 1 },
+            { lat: 37.5571, lng: 126.9825, number: 1 },
+            { lat: 37.5485, lng: 126.9823, number: 1 },
+            { lat: 37.5500, lng: 126.9861, number: 1 },
+            { lat: 37.5494, lng: 126.9943, number: 1 },
+            { lat: 37.5549, lng: 126.9860, number: 1 },
+            { lat: 37.5538, lng: 126.9889, number: 1 },
+            { lat: 37.5501, lng: 126.9875, number: 1 },
+            { lat: 37.5565, lng: 126.9835, number: 1 },
+            { lat: 37.5560, lng: 126.9966, number: 1 },
+            { lat: 37.5504, lng: 126.9956, number: 1 },
+            { lat: 37.5519, lng: 126.9806, number: 1 },
+            { lat: 37.5495, lng: 126.9909, number: 1 },
+            { lat: 37.5456, lng: 126.9895, number: 1 },
+            { lat: 37.5508, lng: 126.9896, number: 1 },
+            { lat: 37.5459, lng: 126.9868, number: 1 },
+            { lat: 37.5492, lng: 126.9809, number: 1 },
+            { lat: 37.5473, lng: 126.9803, number: 1 },
+            { lat: 37.5510, lng: 126.9854, number: 1 },
+            { lat: 37.5479, lng: 126.9854, number: 1 },
+            { lat: 37.5518, lng: 126.9969, number: 1 },
+            { lat: 37.5482, lng: 126.9948, number: 1 },
+            { lat: 37.5534, lng: 126.9933, number: 1 },
+            { lat: 37.5893, lng: 126.9961, number: 1 },
+            { lat: 37.5799, lng: 126.9869, number: 1 },
+            { lat: 37.5918, lng: 126.9876, number: 1 },
+            { lat: 37.5886, lng: 126.9898, number: 1 },
+            { lat: 37.5910, lng: 126.9941, number: 1 },
+            { lat: 37.5881, lng: 126.9979, number: 1 },
+            { lat: 37.5924, lng: 126.9836, number: 1 },
+            { lat: 37.5836, lng: 126.9871, number: 1 },
+            { lat: 37.5908, lng: 126.9831, number: 1 },
+            { lat: 37.5863, lng: 126.9968, number: 1 },
+            { lat: 37.5848, lng: 126.9856, number: 1 },
+            { lat: 37.5874, lng: 126.9891, number: 1 },
+            { lat: 37.5819, lng: 126.9826, number: 1 },
+            { lat: 37.5871, lng: 126.9829, number: 1 },
+            { lat: 37.5878, lng: 126.9925, number: 1 },
+            { lat: 37.5844, lng: 126.9954, number: 1 },
+            { lat: 37.5855, lng: 126.9963, number: 1 },
+            { lat: 37.5891, lng: 126.9873, number: 1 },
+            { lat: 37.5803, lng: 126.9841, number: 1 },
+            { lat: 37.5865, lng: 126.9882, number: 1 },
+            { lat: 37.5863, lng: 126.9834, number: 1 },
+            { lat: 37.5878, lng: 126.9890, number: 1 },
+            { lat: 37.5873, lng: 126.9908, number: 1 },
+            { lat: 37.5870, lng: 126.9941, number: 1 },
+            { lat: 37.5842, lng: 126.9888, number: 1 },
+            { lat: 37.5838, lng: 126.9910, number: 1 },
+            { lat: 37.5833, lng: 126.9902, number: 1 },
+            { lat: 37.5884, lng: 126.9864, number: 1 },
+            { lat: 37.5851, lng: 126.9868, number: 1 },
+            { lat: 37.5902, lng: 126.9943, number: 1 },
+            { lat: 37.5854, lng: 126.9939, number: 1 },
+            { lat: 37.5830, lng: 126.9872, number: 1 },
+            { lat: 37.5882, lng: 126.9898, number: 1 },
+            { lat: 37.5841, lng: 126.9953, number: 1 },
+            { lat: 37.5886, lng: 126.9826, number: 1 },
+            { lat: 37.5904, lng: 126.9874, number: 1 },
+            { lat: 37.5859, lng: 126.9819, number: 1 },
+            { lat: 37.5832, lng: 126.9962, number: 1 },
+            { lat: 37.5839, lng: 126.9893, number: 1 },
+            { lat: 37.5900, lng: 126.9854, number: 1 },
+            { lat: 37.5892, lng: 126.9842, number: 1 },
+            { lat: 37.5847, lng: 126.9818, number: 1 },
+            { lat: 37.5889, lng: 126.9811, number: 1 },
+            { lat: 37.5884, lng: 126.9944, number: 1 },
+            { lat: 37.5912, lng: 126.9955, number: 1 },
+            { lat: 37.5855, lng: 126.9905, number: 1 },
+            { lat: 37.5905, lng: 126.9912, number: 1 },
+            { lat: 37.5826, lng: 126.9847, number: 1 },
+            { lat: 37.5877, lng: 126.9937, number: 1 },
+            { lat: 37.5872, lng: 126.9847, number: 1 },
+            { lat: 37.5861, lng: 126.9867, number: 1 },
+            { lat: 37.5864, lng: 126.9817, number: 1 },
+            { lat: 37.5862, lng: 126.9964, number: 1 },
+            { lat: 37.5865, lng: 126.9825, number: 1 },
+            { lat: 37.5844, lng: 126.9895, number: 1 },
+            { lat: 37.5915, lng: 126.9845, number: 1 },
+            { lat: 37.5905, lng: 126.9881, number: 1 },
+                    ];
+            
+                    initSearchBox(map);
+                    addMarkers(map, locations);
+                  }
+            
+                  function initSearchBox(map) {
+                    var searchBox = new google.maps.places.Autocomplete(
+                      document.getElementById("search-box")
+                    );
+            
+                    searchBox.bindTo("bounds", map);
+            
+                    searchBox.addListener("place_changed", function () {
+                      var place = searchBox.getPlace();
+            
+                      if (!place.geometry) {
+                        console.log("찾지 못해요ㅠㅠ");
+                        return;
+                      }
+            
+                      map.setCenter(place.geometry.location);
+                      map.setZoom(15);
+                    });
+                  }
+            
+                  function createClusterIcon(number) {
+                    var fontSize = 12;
+                    var iconWidth = 30;
+                    var iconHeight = 30;
+            
+                    var canvas = document.createElement("canvas");
+                    canvas.width = iconWidth;
+                    canvas.height = iconHeight;
+                    var context = canvas.getContext("2d");
+            
+                    context.beginPath();
+                    context.arc(iconWidth / 2, iconHeight / 2, iconWidth / 2, 0, 2 * Math.PI);
+                    context.fillStyle = "#FFA500";
+                    context.fill();
+            
+                    context.font = fontSize + "px Arial";
+                    context.fillStyle = "white";
+                    context.textAlign = "center";
+                    context.textBaseline = "middle";
+                    context.fillText(number, iconWidth / 2, iconHeight / 2);
+            
+                    return canvas.toDataURL();
+                  }
+            
+                  function addMarkers(map, locations) {
+              var markers = locations.map(function (location) {
+                return new google.maps.Marker({
+                  position: { lat: location.lat, lng: location.lng },
+                  icon: {
+                    url: createClusterIcon(location.number),
+                    size: new google.maps.Size(30, 30),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(15, 15),
+                  },
+                  title: "Number: " + location.number,
+                });
+              });
+            
+              
+              var markerCluster = new MarkerClusterer(map, markers, {
+                imagePath:
+                  "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+                gridSize: 60,
+                minimumClusterSize: 1,
+                styles: [
+                  {
+                    url: createClusterIcon(1), 
+                    width: 30,
+                    height: 30,
+                  
+                    textSize: 0,
+                    anchor: [15, 15]
+                  }
+                ]
+              });
+            }
+            
+            
+            
+                </script>
+              </body>
+            <!-- Main content goes here -->
+        </div>
+        <div class="sidebar">
+            <h3>Links</h3>
+            <ul class="sidebar-links">
+                <li><a class="sidebar-link" href="#">Link 1</a></li>
+                <li><a class="sidebar-link" href="#">Link 2</a></li>
+                <li><a class="sidebar-link" href="#">Link 3</a></li>
+                <li><a class="sidebar-link" href="#">Link 4</a></li>
+            </ul>
+            <!-- Side content goes here -->
+        </div>
+    </div>
+    <script>
+        document.querySelector('.login-btn').addEventListener('click', () => {
+            // Implement login functionality here
+            alert('Currently preparing the service ! Sorry for the inconvenience !');
+        });
+    </script>
+</body>
+</html>
+
